@@ -1,0 +1,117 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>To-Do List</h1>
+    {% if session.get('is_admin') %}
+  <div style="text-align: right;">
+    <a href="/admin" class="edit-btn">Admin Panel</a>
+  </div>
+    {% endif %}
+
+  <div style="text-align: right; margin-bottom: 15px;">
+  <a href="/logout" class="logout-link">Logout</a>
+  </div>
+
+
+    
+    <form action="/add" method="POST">
+      <input type="text" name="task" placeholder="Add Task" required>
+      <input type="date" name="due" required>
+      <select name="priority">
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+      </select>
+      <select name="status">
+        <option value="Pending">Pending</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+      </select>
+
+      <button type="submit">Add</button>
+    </form>
+
+    
+    <ul>
+      {% for t in tasks %}
+    <li>
+       {{ t.task }} | Due: {{ t.due }} | Priority: {{ t.priority }} | Status: {{ t.status }}
+      <form action="{{ url_for('delete', id=t.id) }}" method="get" style="display:inline;">
+      <button type="submit" class="remove-btn">Remove</button>
+      </form>
+      <a href="/edit/{{ t.id }}" class="edit-btn">Edit</a>
+    </li>
+
+      {% endfor %}
+
+    </ul>
+  </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <div class="dashboard-container">
+
+      <div class="header">
+        <h2 class="logo">Welcome, {{ session['username'] }}</h2>
+        <a href="/logout" class="logout">Logout</a>
+      </div>
+
+      <h1 class="page-title">To-Do List</h1>
+
+      <form action="/add" method="POST" class="todo-form">
+        <input type="text" name="task" placeholder="Add Task" required>
+        <input type="date" name="due" required>
+        <select name="priority">
+          <option value="Low">Low</option>
+          <option value="Medium" selected>Medium</option>
+          <option value="High">High</option>
+        </select>
+        <button type="submit">Add</button>
+      </form>
+      
+      
+      <ul>
+        {% for t in tasks %}
+      <li class="task-item">
+      <div>
+        <strong>{{ t.task }}</strong> 
+        Due: {{ t.due }} |
+        Priority: {{ t.priority }} |
+        Status:
+        <form action="/update_status/{{ t.id }}" method="post" class="inline-form">
+          <select name="status" onchange="this.form.submit()">
+            <option value="Pending" {% if t.status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="Completed" {% if t.status == 'Completed' %}selected{% endif %}>Completed</option>
+          </select>
+        </form>
+      </div>
+
+      <form action="/delete/{{ t.id }}" method="post" class="inline-form">
+        <button type="submit" class="remove-btn">Remove</button>
+      </form>
+      </li>
+        {% endfor %}
+      </ul>
+
+    </div>
+  </div>
+</body>
+</html>

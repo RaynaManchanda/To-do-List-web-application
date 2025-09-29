@@ -1,0 +1,49 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ category }} Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>{{ category }} Dashboard</h2>
+
+    <form action="/add/{{ category }}" method="POST">
+      <input type="text" name="task" placeholder="Add Task" required>
+      <input type="date" name="due" required>
+      <select name="priority">
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+      </select>
+      <button type="submit">Add Task</button>
+    </form>
+
+    <ul>
+      {% for t in tasks %}
+      <li>
+         {{ t.task }} | Due: {{ t.due }} | Priority: {{ t.priority }} | Status: {{ t.status }}
+
+        
+        <form action="/update/{{ t.id }}/{{ category }}" method="POST" style="display:inline;">
+          <select name="status">
+            <option value="Pending" {% if t.status == 'Pending' %}selected{% endif %}>Pending</option>
+            <option value="Completed" {% if t.status == 'Completed' %}selected{% endif %}>Completed</option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+
+        
+        <form action="/delete/{{ t.id }}/{{ category }}" method="POST" style="display:inline;">
+          <button type="submit" class="remove-btn">Remove</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <br>
+    <a href="/logout"><button class="btn">Logout</button></a>
+  </div>
+</body>
+ </html> --> 

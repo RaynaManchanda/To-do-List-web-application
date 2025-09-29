@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Dashboard</h1>
+
+    <h2>All Users</h2>
+    <ul>
+      {% for u in users %}
+        <li>{{ u.username }} {% if u.is_admin %}(Admin){% endif %} | Joined: {{ u.created_at.strftime("%Y-%m-%d") }}</li>
+      {% endfor %}
+    </ul>
+
+    <h2>All Tasks</h2>
+    <ul>
+      {% for t in tasks %}
+        <li>
+          <strong>{{ t.username }}</strong>: {{ t.task }} | {{ t.priority }} | {{ t.status }} | Due: {{ t.due }}
+          <a href="{{ url_for('delete', id=t.id) }}" class="remove-btn">Delete</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <a href="/home" class="edit-btn">Back to Home</a>
+  </div>
+</body>
+</html>

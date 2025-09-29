@@ -1,0 +1,52 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - ToDo App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="Enter username" required>
+      <input type="password" name="password" placeholder="Enter password" required>
+      <button type="submit">Login</button>
+      {% if error %}
+        <p style="color: red;">{{ error }}</p>
+      {% endif %}
+    </form>
+  </div>
+  <div style="text-align: center; margin-top: 15px;">
+  <a href="/signup" class="forgot-link">Create Account</a> |
+  <a href="/forgot" class="forgot-link">Forgot Password?</a>
+  </div>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="auth-container">
+    <h1>Log In</h1>
+    <form method="POST">
+      <input type="text" name="username" placeholder="Enter Username" required>
+      <input type="password" name="password" placeholder="Enter Password" required>
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="link">
+      <a href="/forgot">Forgot Password?</a><br>
+      <a href="/signup">Don't have an account? Sign up</a>
+    </div>
+  </div>
+</body>
+</html>
