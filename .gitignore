@@ -1,0 +1,9 @@
+# Virtual environment
+.venv/
+# Python compiled files
+__pycache__/
+*.pyc
+# Environment variables (optional but recommended for secrets)
+.env
+# Database files (if using SQLite or similar)
+*.db
